@@ -24,7 +24,7 @@
 *   login.php
     * 用户可使用已存入数据库的合法用户名和口令登录系统,用户名和口令为空或者不匹配则报错
     * hash算法验证输入的密码是否对应用户名的密码
-*   register.html
+*   register.html
     * 注册界面
     * 点击“登录”进入登录界面
 *   register.php

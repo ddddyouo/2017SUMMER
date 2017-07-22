@@ -29,11 +29,11 @@
 
         <form method="post" action="register.php">
           <div class="form-group">
-            <input type="username" name="username" placeholder="用户名" class="form-control rounded input-lg text-center no-border">
+            <input type="username" name="username" placeholder="用户名（中文、英文字母、数字）" class="form-control rounded input-lg text-center no-border">
             <span class="error"><?php echo isset($_SESSION['usernameErr']) ? $_SESSION['usernameErr'] : '';?></span>
           </div>
           <div class="form-group">
-             <input type="password" name="password1" placeholder="输入密码" class="form-control rounded input-lg text-center no-border">
+             <input type="password" name="password1" placeholder="输入密码（36个字符之内）" class="form-control rounded input-lg text-center no-border">
              <span class="error"><?php echo isset($_SESSION['password1Err']) ? $_SESSION['password1Err'] : '';?></span>
           </div>
           <div class="form-group">

@@ -20,6 +20,9 @@ if($link)
     {
       $name=$_POST["username"];
       $password=$_POST["password"];
+
+      $link->query('SET NAMES UTF8');
+
       if($name==""||$password=="")//判断是否输入完整
       {
         echo "请填写完整！";
@@ -28,9 +31,9 @@ if($link)
         exit;
       }
 
-      $str="select password from users where username='$name'";//在数据库中查找该用户的密码
+      $str="select * from users where user_name='$name'";//在数据库中查找该用户
       $result=$link->query($str);
-      $row=$result->fetchColumn();
+      $row = $result->fetch(PDO::FETCH_ASSOC);
 
       if($row==null)//密码为空，则用户不存在
       {
@@ -40,7 +43,12 @@ if($link)
         exit;
       }
 
-      if($row==$password)//判断密码与注册时密码是否一致
+      $user_hash=$row['user_pswd_hash'];
+      $user_salt=$row['user_salt'];
+      $iterations=1000;
+      $user_login_hash = hash_pbkdf2("sha256", $password, $user_salt, $iterations, 20);
+
+      if($user_hash==$user_login_hash)//判断密码与注册时密码是否一致
       {
         echo "登录成功！";
         header("refresh:2,$cloudurl");
